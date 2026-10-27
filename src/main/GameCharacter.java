@@ -5,13 +5,22 @@ import java.util.Random;
 public abstract class GameCharacter implements Superpower, CalculateDamage {
     private final Random random = new Random();
     private int hp;
-    private boolean isAlive;
-    private String name;
+    private final String name;
 
-    public GameCharacter( int hp, boolean isAlive, String name) {
+    public GameCharacter( int hp, String name) {
         this.hp = hp;
-        this.isAlive = isAlive;
         this.name = name;
+    }
+
+    public void receiveDamage(int damage){
+        if (damage < 0){
+            throw new IllegalArgumentException("Damage must not be negative.");
+        }
+        hp = Math.max(0, hp - damage);
+    }
+
+    public boolean isAlive(){
+        return hp>0;
     }
 
     public String getName(){
@@ -27,8 +36,6 @@ public abstract class GameCharacter implements Superpower, CalculateDamage {
         return hp;
     }
 
-    public int calculateDamage(){
-        return getRandom().nextInt(11) ;
-
-    }
+    @Override
+    public abstract int calculateDamage();
 }

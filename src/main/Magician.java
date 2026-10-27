@@ -4,7 +4,7 @@ public class Magician extends GameCharacter{
 
 
     public Magician (){
-        super(150, true, "Magician");
+        super(150, "Magician");
     }
 
 
@@ -12,7 +12,7 @@ public class Magician extends GameCharacter{
 
     }
 
-    //fundera om vi kan flytta denna metod till basklass istället
+    @Override
     public int calculateDamage(){
         return getRandom().nextInt(11) + 12 ;
     }

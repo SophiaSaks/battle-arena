@@ -24,4 +24,7 @@ public class Player {
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
+    public GameCharacter getCharacter() {
+        return character;
+    }
 }
