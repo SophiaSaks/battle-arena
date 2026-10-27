@@ -14,13 +14,18 @@ public abstract class GameCharacter implements Superpower, CalculateDamage {
 
     public void receiveDamage(int damage){
         if (damage < 0){
-            throw new IllegalArgumentException("Damage must not be negative.");
+            throw new IllegalArgumentException("Damage can not be negative.");
         }
-        hp = Math.max(0, hp - damage);
+        int actualDamage = adjustDamage(damage);
+        hp = Math.max(0, hp - actualDamage);
     }
 
     public boolean isAlive(){
         return hp>0;
+    }
+
+    protected int adjustDamage (int damage){
+        return damage;
     }
 
     public String getName(){

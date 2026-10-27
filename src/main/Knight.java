@@ -1,6 +1,7 @@
 package main;
 
 public class Knight extends GameCharacter{
+    private boolean shieldActive;
 
     public Knight (){
         super(120, "Knight");
@@ -8,8 +9,7 @@ public class Knight extends GameCharacter{
 
     @Override
     public void useSuperpower(){
-
-
+        shieldActive = true;
     }
 
     @Override
@@ -17,5 +17,14 @@ public class Knight extends GameCharacter{
         return getRandom().nextInt(11) + 8;
     }
 
+    @Override
+    protected int adjustDamage(int damage) {
+        if (shieldActive) {
+            damage = damage / 2;
+            shieldActive = false;
+        }
+
+        return damage;
+    }
 
 }
