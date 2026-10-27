@@ -1,4 +1,4 @@
-package main;
+package arena;
 
 public interface Superpower {
     void useSuperpower();

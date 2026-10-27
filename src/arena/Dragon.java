@@ -1,4 +1,4 @@
-package main;
+package arena;
 
 public class Dragon extends GameCharacter{
 
