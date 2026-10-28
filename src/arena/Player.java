@@ -4,12 +4,12 @@ public class Player {
     private String name;
     private GameCharacter character;
 
-    public Player (String name, GameCharacter character ){
+    public Player(String name, GameCharacter character) {
         this.name = name;
         this.character = character;
     }
 
-    public Player(){
+    public Player() {
 
     }
 
@@ -17,13 +17,14 @@ public class Player {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
+
     public GameCharacter getCharacter() {
         return character;
     }
