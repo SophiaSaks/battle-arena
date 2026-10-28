@@ -1,20 +1,20 @@
 package arena;
 
-public class Magician extends GameCharacter{
+public class Magician extends GameCharacter {
 
 
-    public Magician (){
+    public Magician() {
         super(150, "Magician");
     }
 
 
     @Override
-    public void useSuperpower(){
+    public void useSuperpower() {
 
     }
 
     @Override
-    public int calculateDamage(){
-        return getRandom().nextInt(11) + 12 ;
+    public int calculateDamage() {
+        return getRandom().nextInt(11) + 12;
     }
 }
