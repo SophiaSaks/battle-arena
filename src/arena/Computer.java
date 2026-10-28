@@ -1,4 +1,4 @@
-package main;
+package arena;
 
 //public class Computer extends Character {
 //    private String name;

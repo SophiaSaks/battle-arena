@@ -1,17 +1,17 @@
-package main;
+package arena;
 
 public class Ranger extends GameCharacter{
-    private String name;
+
 
     public Ranger (){
-        super(100, true, "Ranger");
+        super(100, "Ranger");
 
     }
 
     public void useSuperpower(){
 
     }
-
+    @Override
     public int calculateDamage(){
         return getRandom().nextInt(11) + 5;
     }

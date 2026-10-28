@@ -1,9 +1,9 @@
-package main;
+package arena;
 
 public class Dragon extends GameCharacter{
 
     public Dragon (){
-        super(80, true, "Dragon");
+        super(80, "Dragon");
     }
 
 
@@ -11,8 +11,9 @@ public class Dragon extends GameCharacter{
 
     }
 
+    @Override
     public int calculateDamage(){
-        return getRandom().nextInt(11) ;
+        return getRandom().nextInt(11)+9 ;
 
     }
 }

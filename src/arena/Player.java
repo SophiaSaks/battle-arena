@@ -1,4 +1,4 @@
-package main;
+package arena;
 
 public class Player {
     private String name;
@@ -23,5 +23,8 @@ public class Player {
 
     public void setCharacter(GameCharacter character) {
         this.character = character;
+    }
+    public GameCharacter getCharacter() {
+        return character;
     }
 }
