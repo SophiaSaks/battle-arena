@@ -8,6 +8,7 @@ public class Ranger extends GameCharacter{
 
     }
 
+    @Override
     public void useSuperpower(){
 
     }

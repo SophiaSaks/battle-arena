@@ -1,5 +1,6 @@
 package arena;
 
+import java.lang.classfile.attribute.SourceDebugExtensionAttribute;
 import java.util.Scanner;
 
 public class Menu {
@@ -9,9 +10,37 @@ public class Menu {
     static void menu () {
 
         boolean isRunning = true;
-        Player player = new Player();
 
         while (isRunning) {
+            System.out.println("\nBATTLE ARENA\n");
+            System.out.println("1. Start new game");
+            System.out.println("2. View match history");
+            System.out.println("3. Exit");
+            System.out.println("Choose an option: ");
+
+            String choice = scanner.nextLine().trim();
+            switch (choice){
+                case "1" -> {
+                Player player = createPlayer();
+                    System.out.println("You selected " + player.getCharacter().getName());
+                }
+                case "2" ->
+                    System.out.println("Match history is not available yet");
+
+                case "3" -> {
+                    isRunning = false;
+                    System.out.println("Goodbye");
+                }
+                default ->
+                    System.out.println("Invalid choice. Enter 1, 2 or 3");
+            }
+        }
+
+    }
+        public static Player createPlayer(){
+        Player player = new Player();
+
+        while (true) {
 
 
             System.out.println("What´s your name?");
@@ -29,7 +58,6 @@ public class Menu {
             System.out.println("1. Magician" + "\n" + "2. Knight" + "\n" + "3. Dragon" + "\n" + "4. Ranger");
 
 
-//            try{
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1" -> player.setCharacter(new Magician());
@@ -41,12 +69,8 @@ public class Menu {
                 continue;
             }
         }
-//
-//            }catch(InputMismatchException e){
-//                System.out.println("Pick a number between 1-4");
-//            }
-            System.out.println("You are selected: " + player.getCharacter().getName());
-            return;
+
+            return player;
         }
     }
 }
