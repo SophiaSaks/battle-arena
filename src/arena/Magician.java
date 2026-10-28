@@ -8,6 +8,7 @@ public class Magician extends GameCharacter{
     }
 
 
+    @Override
     public void useSuperpower(){
 
     }
