@@ -1,5 +1,5 @@
 package arena;
 
 public interface Superpower {
-    void useSuperpower();
+    boolean useSuperpower();
 }

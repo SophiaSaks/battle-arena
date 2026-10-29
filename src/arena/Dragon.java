@@ -7,7 +7,7 @@ public class Dragon extends GameCharacter{
     }
 
 
-    public void useSuperpower(){
+    public boolean useSuperpower(){
 
     }
 
