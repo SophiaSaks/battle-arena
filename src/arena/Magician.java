@@ -1,6 +1,7 @@
 package arena;
 
 public class Magician extends GameCharacter {
+    private boolean isMirrorActive;
 
 
     public Magician() {
@@ -9,7 +10,8 @@ public class Magician extends GameCharacter {
 
 
     @Override
-    public void useSuperpower() {
+    public boolean useSuperpower() {
+        return isMirrorActive = true;
 
     }
 

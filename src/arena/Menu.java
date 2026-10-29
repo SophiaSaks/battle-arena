@@ -59,10 +59,20 @@ public class Menu {
                 System.out.println(player.getName() + " attacked " + computer.getName());
                 System.out.println(computer.getName() + " has " + computer.getCharacter().getHp() + " HP left.");
 
+                if(computer.getCharacter().getHp() <= 0) {
+                    break;
+                }
+
                 // Computer attacks player
                 game.attack(computer.getCharacter(), player.getCharacter());
                 System.out.println(computer.getName() + " attacked " + player.getName());
                 System.out.println(player.getName() + " has " + player.getCharacter().getHp() + " HP left.");
+            }
+            if(player.getCharacter().getHp() == 0){
+                System.out.println("You lost!");
+
+            }else{
+                System.out.println("Computer lost!");
             }
         }
     }

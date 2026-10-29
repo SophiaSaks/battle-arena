@@ -7,9 +7,13 @@ public class Knight extends GameCharacter {
         super(120, "Knight");
     }
 
+    public boolean isShieldActive() {
+        return shieldActive;
+    }
+
     @Override
-    public void useSuperpower() {
-        shieldActive = true;
+    public boolean useSuperpower() {
+        return shieldActive = true;
     }
 
     @Override
