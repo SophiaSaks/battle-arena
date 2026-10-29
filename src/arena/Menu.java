@@ -53,10 +53,31 @@ public class Menu {
 
             while (player.getCharacter().getHp() > 0 && computer.getCharacter().getHp() > 0) {
 
+                // Player chooses an action.
+                System.out.println("\n" + player.getName() + "'s turn:");
+                int action = 0;
 
-                // Player attacks computer
-                game.attack(player.getCharacter(), computer.getCharacter());
-                System.out.println(player.getName() + " attacked " + computer.getName());
+                while (action < 1 || action > 2) {
+                    System.out.println( "\n" + "Choose an action:");
+                    System.out.println("1. Attack" + "\n" + "2. Use superpower");
+                    try {
+                        action = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Enter a number.");
+                    }
+                    scanner.nextLine();
+                }
+
+                    // Player attacks computer
+                if (action == 1) {
+                 game.attack(player.getCharacter(), computer.getCharacter());
+                 System.out.println(player.getName() + " attacked " + computer.getName());
+
+                } else {
+                    game.useSuperpower(player.getCharacter());
+                }
+
+                System.out.println( player.getName() + ": " + player.getCharacter().getHp() + " HP");
                 System.out.println(computer.getName() + " has " + computer.getCharacter().getHp() + " HP left.");
 
                 if(computer.getCharacter().getHp() <= 0) {
@@ -64,16 +85,26 @@ public class Menu {
                 }
 
                 // Computer attacks player
-                game.attack(computer.getCharacter(), player.getCharacter());
-                System.out.println(computer.getName() + " attacked " + player.getName());
-                System.out.println(player.getName() + " has " + player.getCharacter().getHp() + " HP left.");
-            }
-            if(player.getCharacter().getHp() == 0){
-                System.out.println("You lost!");
+                // Computer randomly chooses 1-attack or 2-superpower.
+                  System.out.println("\nComputer's turn:");
+                  int computerAction = (int) (Math.random() * 2) + 1;
+                    if (computerAction == 1) {
+                        game.attack(computer.getCharacter(), player.getCharacter());
+                        System.out.println(computer.getName() + " attacked " + player.getName());
+                    } else {
+                        game.useSuperpower(computer.getCharacter());
+                    }
 
-            }else{
-                System.out.println("Computer lost!");
+                System.out.println(player.getName() + " has " + player.getCharacter().getHp() + " HP left.");
+                System.out.println(computer.getName() + " has " + computer.getCharacter().getHp() + " HP left.");
+
             }
+            if (player.getCharacter().getHp() <= 0) {
+                System.out.println("Winner: Computer");
+            } else {
+                System.out.println("Winner: " + player.getName());
+            }
+//            isRunning = false;
         }
     }
 }

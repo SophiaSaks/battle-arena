@@ -10,7 +10,7 @@ public class Ranger extends GameCharacter{
 
     @Override
     public boolean useSuperpower(){
-
+        return true;
     }
     @Override
     public int calculateDamage(){
