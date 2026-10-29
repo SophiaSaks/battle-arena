@@ -7,37 +7,37 @@ public abstract class GameCharacter implements Superpower, CalculateDamage {
     private int hp;
     private final String name;
 
-    public GameCharacter( int hp, String name) {
+    public GameCharacter(int hp, String name) {
         this.hp = hp;
         this.name = name;
     }
 
-    public void receiveDamage(int damage){
-        if (damage < 0){
+    public void receiveDamage(int damage) {
+        if (damage < 0) {
             throw new IllegalArgumentException("Damage can not be negative.");
         }
         int actualDamage = adjustDamage(damage);
         hp = Math.max(0, hp - actualDamage);
     }
 
-    public boolean isAlive(){
-        return hp>0;
+    public boolean isAlive() {
+        return hp > 0;
     }
 
-    protected int adjustDamage (int damage){
+    protected int adjustDamage(int damage) {
         return damage;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Random getRandom(){
+    public Random getRandom() {
         return random;
     }
 
 
-    public int getHp(){
+    public int getHp() {
         return hp;
     }
 

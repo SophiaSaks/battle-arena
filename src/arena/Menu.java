@@ -1,76 +1,69 @@
 package arena;
 
-import java.lang.classfile.attribute.SourceDebugExtensionAttribute;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
     private static Scanner scanner = new Scanner(System.in);
 
+    private GameCharacter character;
 
-    static void menu () {
+    static void menu() {
 
+        int choice;
         boolean isRunning = true;
+        Player player = new Player();
+        Computer computer = new Computer();
+        Game game = new Game();
 
         while (isRunning) {
-            System.out.println("\nBATTLE ARENA\n");
-            System.out.println("1. Start new game");
-            System.out.println("2. View match history");
-            System.out.println("3. Exit");
-            System.out.println("Choose an option: ");
 
-            String choice = scanner.nextLine().trim();
-            switch (choice){
-                case "1" -> {
-                Player player = createPlayer();
-                    System.out.println("You selected " + player.getCharacter().getName());
-                }
-                case "2" ->
-                    System.out.println("Match history is not available yet");
+            System.out.println("What's your name?");
 
-                case "3" -> {
-                    isRunning = false;
-                    System.out.println("Goodbye");
-                }
-                default ->
-                    System.out.println("Invalid choice. Enter 1, 2 or 3");
-            }
-        }
-
-    }
-        public static Player createPlayer(){
-        Player player = new Player();
-
-        while (true) {
-
-
-            System.out.println("What´s your name?");
-            String name = scanner.nextLine().trim();
-            if (name.isBlank()){
-                System.out.println("please enter your name:");
-                continue;
-            }
+            String name = scanner.nextLine();
             player.setName(name);
-            break;
-        }
-
-        while (true) {
-            System.out.println("Hej " + player.getName() + "!" + "\n" + "Pick a character: ");
+            System.out.println(player.getName() + ", Pick a character: ");
             System.out.println("1. Magician" + "\n" + "2. Knight" + "\n" + "3. Dragon" + "\n" + "4. Ranger");
 
+            try {
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1 -> player.setCharacter(new Magician());
+                    case 2 -> player.setCharacter(new Knight());
+                    case 3 -> player.setCharacter(new Dragon());
+                    case 4 -> player.setCharacter(new Ranger());
+                    default -> System.out.println("No character picked!");
+                }
 
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "1" -> player.setCharacter(new Magician());
-                case "2" -> player.setCharacter(new Knight());
-                case "3" -> player.setCharacter(new Dragon());
-                case "4" -> player.setCharacter(new Ranger());
-                default -> {
-                    System.out.println("No character picked!");
-                continue;
+            } catch (InputMismatchException e) {
+                System.out.println("Pick a number between 1-4");
             }
-        }
+            System.out.println("You picked: " + player.getCharacter().getName() + " with " + player.getCharacter().getHp() + " HP");
 
-            return player;
+            computer.setName("Computer");
+            int characterChoice = (int) (Math.random() * 4) + 1;
+
+            switch (characterChoice) {
+                case 1 -> computer.setCharacter(new Magician());
+                case 2 -> computer.setCharacter(new Knight());
+                case 3 -> computer.setCharacter(new Dragon());
+                case 4 -> computer.setCharacter(new Ranger());
+            }
+            System.out.println("Computer picked: " + computer.getCharacter().getName() + " with " + computer.getCharacter().getHp() + " HP");
+
+            while (player.getCharacter().getHp() > 0 && computer.getCharacter().getHp() > 0) {
+
+
+                // Player attacks computer
+                game.attack(player.getCharacter(), computer.getCharacter());
+                System.out.println(player.getName() + " attacked " + computer.getName());
+                System.out.println(computer.getName() + " has " + computer.getCharacter().getHp() + " HP left.");
+
+                // Computer attacks player
+                game.attack(computer.getCharacter(), player.getCharacter());
+                System.out.println(computer.getName() + " attacked " + player.getName());
+                System.out.println(player.getName() + " has " + player.getCharacter().getHp() + " HP left.");
+            }
         }
     }
 }

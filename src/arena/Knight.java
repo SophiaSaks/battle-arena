@@ -1,19 +1,19 @@
 package arena;
 
-public class Knight extends GameCharacter{
+public class Knight extends GameCharacter {
     private boolean shieldActive;
 
-    public Knight (){
+    public Knight() {
         super(120, "Knight");
     }
 
     @Override
-    public void useSuperpower(){
+    public void useSuperpower() {
         shieldActive = true;
     }
 
     @Override
-    public int calculateDamage(){
+    public int calculateDamage() {
         return getRandom().nextInt(11) + 8;
     }
 
