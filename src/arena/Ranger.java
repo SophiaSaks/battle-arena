@@ -7,10 +7,10 @@ public class Ranger extends GameCharacter{
         super(100, "Ranger");
 
     }
-
+    //Vi kan välja vilken Action vi vill ha här
     @Override
-    public boolean useSuperpower(){
-        return true;
+    public Action getSpecialAction() {
+        return Action.HEAL;
     }
     @Override
     public int calculateDamage(){
