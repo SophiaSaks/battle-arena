@@ -12,11 +12,6 @@ public class Knight extends GameCharacter {
     }
 
     @Override
-    public boolean useSuperpower() {
-        return shieldActive = true;
-    }
-
-    @Override
     public int calculateDamage() {
         return getRandom().nextInt(11) + 8;
     }
@@ -31,4 +26,8 @@ public class Knight extends GameCharacter {
         return damage;
     }
 
+    @Override
+    public Action getSpecialAction() {
+        return Action.DEFEND;
+    }
 }

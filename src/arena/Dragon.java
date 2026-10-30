@@ -1,19 +1,19 @@
 package arena;
 
-public class Dragon extends GameCharacter{
+public class Dragon extends GameCharacter {
 
-    public Dragon (){
+    public Dragon() {
         super(80, "Dragon");
     }
 
-
-    public boolean useSuperpower(){
-
+    @Override
+    public Action getSpecialAction() {
+        return Action.SUPERPOWER;
     }
 
     @Override
-    public int calculateDamage(){
-        return getRandom().nextInt(11)+9 ;
-
+    public int calculateDamage() {
+        // Normal attack deals 9–19 damage.
+        return getRandom().nextInt(11) + 9;
     }
 }
