@@ -3,13 +3,15 @@ package arena;
 public class Dragon extends GameCharacter {
 
     public Dragon() {
-        super(80, "Dragon");
+        super(80, "Dragon", Superpower.SUPRISE_ATTACK);
     }
 
+    /*
     @Override
-    public Action getSpecialAction() {
-        return Action.SUPERPOWER;
+    public Superpower getSpecialAction() {
+        return Superpower.SUPERPOWER;
     }
+     */
 
     @Override
     public int calculateDamage() {

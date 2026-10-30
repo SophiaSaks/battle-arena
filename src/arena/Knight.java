@@ -4,7 +4,7 @@ public class Knight extends GameCharacter {
     private boolean shieldActive;
 
     public Knight() {
-        super(120, "Knight");
+        super(120, "Knight", Superpower.DEFEND);
     }
 
     public boolean isShieldActive() {
@@ -26,8 +26,10 @@ public class Knight extends GameCharacter {
         return damage;
     }
 
+    /*
     @Override
-    public Action getSpecialAction() {
-        return Action.DEFEND;
+    public Superpower getSpecialAction() {
+        return Superpower.DEFEND;
     }
+     */
 }

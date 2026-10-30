@@ -2,5 +2,5 @@ package arena;
 
 public interface SpecialAction {
     // Returns the character's special action type.
-    Action getSpecialAction();
+    Superpower getSpecialAction();
 }
