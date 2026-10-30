@@ -5,7 +5,7 @@ public class Magician extends GameCharacter {
 
 
     public Magician() {
-        super(150, "Magician");
+        super(150, "Magician", Superpower.HEAL);
     }
 
 
@@ -15,8 +15,10 @@ public class Magician extends GameCharacter {
     }
 
     //Vi kan välja vilken Action vi vill ha här
+    /*
     @Override
-    public Action getSpecialAction() {
-        return Action.SUPERPOWER;
+    public Superpower getSpecialAction() {
+        return Superpower.SUPERPOWER;
     }
+    */
 }
