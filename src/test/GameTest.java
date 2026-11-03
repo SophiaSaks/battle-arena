@@ -93,7 +93,7 @@ public class GameTest {
 
         // Act
 
-        // Assert
+        // Assert2
         int hpAfterHeal = playerCharacter.getHp();
 
         assertTrue(hpAfterHeal > hpBeforeHeal,
