@@ -6,14 +6,12 @@ import java.util.Scanner;
 public class Menu {
     private static Scanner scanner = new Scanner(System.in);
 
-    private GameCharacter character;
-
     static void menu() {
         int choice;
         boolean isRunning = true;
 
         Player player = new Player();
-        Computer computer = new Computer();
+        Player computer = new Player();
         Game game = new Game();
 
         while (isRunning) {
@@ -29,15 +27,7 @@ public class Menu {
 
             try {
                 choice = scanner.nextInt();
-
-                // Bryt ut båda switchar till en metod.
-                switch (choice) {
-                    case 1 -> player.setCharacter(new Magician());
-                    case 2 -> player.setCharacter(new Knight());
-                    case 3 -> player.setCharacter(new Dragon());
-                    case 4 -> player.setCharacter(new Ranger());
-                    default -> System.out.println("No character picked!");
-                }
+                player.selectCharacter(choice, player);
 
             } catch (InputMismatchException e) {
                 System.out.println("Pick a number between 1-4");
@@ -46,14 +36,9 @@ public class Menu {
             System.out.println("You picked: " + player.getCharacter().getName() + " with " + player.getCharacter().getHp() + " HP");
 
             computer.setName("Computer");
-            int characterChoice = (int) (Math.random() * 4) + 1;
 
-            switch (characterChoice) {
-                case 1 -> computer.setCharacter(new Magician());
-                case 2 -> computer.setCharacter(new Knight());
-                case 3 -> computer.setCharacter(new Dragon());
-                case 4 -> computer.setCharacter(new Ranger());
-            }
+            int computerChoice = (int) (Math.random() * 4) + 1;
+            computer.selectCharacter(computerChoice, computer);
 
             System.out.println("Computer picked: " + computer.getCharacter().getName() + " with " + computer.getCharacter().getHp() + " HP");
             while (player.getCharacter().getHp() > 0 && computer.getCharacter().getHp() > 0) {
@@ -85,11 +70,13 @@ public class Menu {
 
                 System.out.println("\nComputer's turn:");
                 int computerAction = (int) (Math.random() * 2) + 1;
+
                 if (computerAction == 1) {
                     game.attack(computer.getCharacter(), player.getCharacter());
                     System.out.println(computer.getName() + " attacked " + player.getName());
                 } else {
                     game.useSpecialAction(computer.getCharacter(), player.getCharacter());
+                    System.out.println(computer.getName() + "used special attack!");
                 }
 
                 game.showHp(player, computer);
