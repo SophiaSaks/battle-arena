@@ -50,6 +50,9 @@ public abstract class GameCharacter implements CalculateDamage {
     public Superpower getSuperPower() {
         return superpower;
     }
+    public boolean isAlive() {
+        return hp > 0;
+    }
 
     protected int adjustDamage(int damage) {
         return damage;
