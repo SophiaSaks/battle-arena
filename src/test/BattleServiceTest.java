@@ -5,9 +5,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameTest {
+public class BattleServiceTest {
 
-    private Game game;
+    private BattleService battleService;
     private Player player;
     private Player computer;
     private GameCharacter playerCharacter;
@@ -24,7 +24,7 @@ public class GameTest {
         computer = new Player("Computer", new Knight());
         playerRanger = new Player("Ranger", new Ranger());
         playerDragon = new Player("Dragon", new Dragon());
-        game = new Game();
+        battleService = new BattleService();
         playerCharacter = player.getCharacter();
         computerCharacter = computer.getCharacter();
         dragonCharacter = playerDragon.getCharacter();
@@ -42,7 +42,7 @@ public class GameTest {
         int playerHpBefore = playerCharacter.getHp();
 
         // Act
-        game.attack(playerCharacter, computerCharacter);
+        battleService.attack(playerCharacter, computerCharacter);
 
         // Asserrt
         int ComputerHpAfter = computerCharacter.getHp();
