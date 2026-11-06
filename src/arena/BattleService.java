@@ -51,12 +51,13 @@ public class BattleService {
     }
 
 
+    public Player getWinner(Player player, Player computer){
+        return !player.getCharacter().isAlive() ? computer :  player;
+    }
+
     public void showWinner(Player player, Player computer) {
-        if (player.getCharacter().getHp() <= 0) {
-            System.out.println("Winner: " + computer.getName());
-        } else {
-            System.out.println("Winner: " + player.getName());
-        }
+        Player winner = getWinner(player, computer);
+        System.out.println("Winner: " + winner.getName());
     }
 
     public static void setUpPlayer(int choice, Player player){

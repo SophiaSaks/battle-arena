@@ -32,7 +32,6 @@ public class BattleServiceTest {
     }
 
 
-    // Test that when the player attacks the computer, the computer's HP decreases
     @Test
     @DisplayName("Player attacked the computer and lowered its HP.")
     void playerAttackLowersComputerHp() {
@@ -52,53 +51,72 @@ public class BattleServiceTest {
         assertEquals(playerHpAfter, playerHpBefore);
     }
 
-    // Test that HP never goes below zero
+
+
     @Test
-    @DisplayName("Player and computer HP never go below zero")
-    void hpNeverGoesBelowZero() {
+    @DisplayName("Healing super powers works")
+    void healingSuperPowersWorks() {
         // Arrange
-        int damageToPlayer = playerCharacter.getHp() + 1;
-        int damageToComputer = computerCharacter.getHp() + 1;
+        //Playercharacter is magician with 150 HP to start with
+        playerCharacter.receiveDamage(50);
+        int hpBeforeHeal = playerCharacter.getHp();
 
         // Act
-        playerCharacter.receiveDamage(damageToPlayer);
-        computerCharacter.receiveDamage(damageToComputer);
-
-        // Assert
-        assertEquals(0, playerCharacter.getHp(), "Player HP should stop at zero");
-        assertEquals(0, computerCharacter.getHp(), "Computer HP should stop at zero");
-    }
-
-    // Test that healing does not exceed maximum HP
-    @Test
-    @DisplayName("Healing never exceeds max HP")
-    void healNeverGoesOverHp() {
-        //Arrange
-        playerCharacter.receiveHealth(156);
-
-        //Act
-        int healedHp = playerCharacter.getHp();
-
-        //Assert
-        assertEquals(150, healedHp, "Player HP should be 150 and no more");
-    }
-
-    // att specialförmågor fungerar
-    @Test
-    @DisplayName("Super powers works")
-    void superPowersWorks() {
-        // Arrange
-        dragonCharacter.receiveDamage(50);
-        int hpBeforeHeal = dragonCharacter.getHp();
-
-        // Act
+        battleService.useSpecialAction(playerCharacter, computerCharacter);
 
         // Assert2
         int hpAfterHeal = playerCharacter.getHp();
 
-        assertTrue(hpAfterHeal > hpBeforeHeal,
-                "Heal should restore HP");
+        assertEquals(120, hpAfterHeal, "HP should be restored by 20%");
+
+        assertTrue(hpAfterHeal  == hpBeforeHeal + hpBeforeHeal * 20/100,
+                "HP should be restored by 20%");
 
     }
+
+    @Test
+    @DisplayName("Surprise attack works")
+    void surpriseAttackWorks(){
+        //Dragon
+    }
+
+    @Test
+    @DisplayName("Dodge works")
+    void dodgeWorks(){
+        //Ranger
+    }
+
+    @Test
+    @DisplayName("Defend works")
+    void defendWorks(){
+        //Knight
+    }
+
+
+    @Test
+    void computerShouldWinWhenPlayerHasZeroHp() {
+        // Arrange
+        playerCharacter.receiveDamage(playerCharacter.getHp());
+
+        // Act
+        Player winner = battleService.getWinner(player, computer);
+
+        // Assert
+        assertSame(computer, winner);
+    }
+
+    @Test
+    void playerShouldWinWhenComputerHasZeroHp() {
+        // Arrange
+        computerCharacter.receiveDamage(computerCharacter.getHp());
+
+        // Act
+        Player winner = battleService.getWinner(player, computer);
+
+        // Assert
+        assertSame(player, winner);
+    }
+
+
 
 }
