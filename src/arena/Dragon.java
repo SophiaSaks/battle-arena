@@ -7,7 +7,6 @@ public class Dragon extends GameCharacter {
 
     @Override
     public int calculateDamage() {
-        // Normal attack deals 9–19 damage.
         return getRandom().nextInt(11) + 9;
     }
 }
