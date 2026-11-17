@@ -1,5 +1,8 @@
 package arena;
 
+import arena.serverclient.Client;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -30,5 +33,15 @@ public class Menu {
         BattleService.setUpPlayer(computerCharacterChoice, computer);
 
         BattleService.playMatch(player, computer, battleService);
+
+        Player winner = battleService.getWinner(player, computer);
+
+        String result = player.getName() + " (" + player.getCharacter().getName() + ")"
+                + " vs " + computer.getName() + " (" + computer.getCharacter().getName() + ")"
+                + " | Winner: " + winner.getName();
+
+        Client client = new Client();
+        client.saveResults(result);
+        System.out.println("Match saved.");
     }
 }

@@ -9,11 +9,11 @@ public class BattleService {
 
     public void attack(GameCharacter attacker, GameCharacter defender) {
         int damage = attacker.calculateDamage();
-        if(defender.isDefendActive()){
+        if (defender.isDefendActive()) {
             damage /= 2;
             defender.setDefendActive(false);
         }
-        if (defender.isDodgeActive()){
+        if (defender.isDodgeActive()) {
             damage = 0;
             defender.setDodgeActive(false);
         }
@@ -26,11 +26,11 @@ public class BattleService {
         switch (superpower) {
             case SUPRISE_ATTACK -> {
                 int damage = random.nextInt(25);
-                if(defender.isDefendActive()){
+                if (defender.isDefendActive()) {
                     damage /= 2;
                     defender.setDefendActive(false);
                 }
-                if (defender.isDodgeActive()){
+                if (defender.isDodgeActive()) {
                     damage = 0;
                     defender.setDodgeActive(false);
                 }
@@ -51,8 +51,8 @@ public class BattleService {
     }
 
 
-    public Player getWinner(Player player, Player computer){
-        return !player.getCharacter().isAlive() ? computer :  player;
+    public Player getWinner(Player player, Player computer) {
+        return !player.getCharacter().isAlive() ? computer : player;
     }
 
     public void showWinner(Player player, Player computer) {
@@ -60,7 +60,7 @@ public class BattleService {
         System.out.println("Winner: " + winner.getName());
     }
 
-    public static void setUpPlayer(int choice, Player player){
+    public static void setUpPlayer(int choice, Player player) {
         player.selectCharacter(choice, player);
         System.out.println(player.getName() + " picked: " + player.getCharacter().getName());
     }
@@ -70,7 +70,7 @@ public class BattleService {
         int turn = random.nextInt(2) + 1;
 
         while (player.getCharacter().isAlive() && computer.getCharacter().isAlive()) {
-            if(turn == 1){
+            if (turn == 1) {
                 System.out.println("\n" + player.getName() + "'s turn:");
                 System.out.println("\nChoose an action:");
                 System.out.println("1. Attack\n2. Use special action");
@@ -78,7 +78,7 @@ public class BattleService {
 
                 executeAction(action, player, computer, battleService);
 
-            } else{
+            } else {
                 System.out.println("\nComputer's turn:\n");
                 int action = random.nextInt(2) + 1;
 
