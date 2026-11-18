@@ -4,10 +4,13 @@ import arena.characters.GameCharacter;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class BattleService {
     private static Random random = new Random();
     private static final Scanner scanner = new Scanner(System.in);
+
+    private static final Logger logg = Logger.getLogger(BattleService.class.getName());
 
     public static int rounds = 0;
     public int getRounds() {
@@ -115,7 +118,7 @@ public class BattleService {
                     return choice;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Choose a whole number");
+            logg.warning("Please enter a whole number." + e.getMessage());
             }
             System.out.println("Choose a number between " + min + " and " + max + ".");
         }
