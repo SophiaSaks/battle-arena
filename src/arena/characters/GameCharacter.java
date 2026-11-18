@@ -1,4 +1,7 @@
-package arena;
+package arena.characters;
+
+import arena.gamelogic.CalculateDamage;
+import arena.gamelogic.Superpower;
 
 import java.util.Random;
 

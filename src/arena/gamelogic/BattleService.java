@@ -1,4 +1,6 @@
-package arena;
+package arena.gamelogic;
+
+import arena.characters.GameCharacter;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -6,6 +8,11 @@ import java.util.Scanner;
 public class BattleService {
     private static Random random = new Random();
     private static final Scanner scanner = new Scanner(System.in);
+
+    public static int rounds = 0;
+    public int getRounds() {
+        return rounds;
+    }
 
     public void attack(GameCharacter attacker, GameCharacter defender) {
         int damage = attacker.calculateDamage();
@@ -19,7 +26,6 @@ public class BattleService {
         }
         defender.receiveDamage(damage);
     }
-
 
     public void useSpecialAction(GameCharacter attacker, GameCharacter defender) {
         Superpower superpower = attacker.getSuperPower();
@@ -65,12 +71,12 @@ public class BattleService {
         System.out.println(player.getName() + " picked: " + player.getCharacter().getName());
     }
 
-
     public static void playMatch(Player player, Player computer, BattleService battleService) {
         int turn = random.nextInt(2) + 1;
 
         while (player.getCharacter().isAlive() && computer.getCharacter().isAlive()) {
             if (turn == 1) {
+                rounds++;
                 System.out.println("\n" + player.getName() + "'s turn:");
                 System.out.println("\nChoose an action:");
                 System.out.println("1. Attack\n2. Use special action");

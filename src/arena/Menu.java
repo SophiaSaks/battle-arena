@@ -1,10 +1,9 @@
 package arena;
 
-// TA BORT DETTA
-
+import arena.gamelogic.BattleService;
+import arena.gamelogic.Player;
 import arena.serverclient.Client;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -40,7 +39,7 @@ public class Menu {
 
         String result = player.getName() + " (" + player.getCharacter().getName() + ")"
                 + " vs " + computer.getName() + " (" + computer.getCharacter().getName() + ")"
-                + " | Winner: " + winner.getName();
+                + " | Winner: " + winner.getName() + " - Rounds: " + battleService.getRounds();
 
         Client client = new Client();
         client.saveResults(result);
