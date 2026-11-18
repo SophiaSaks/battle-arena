@@ -1,6 +1,8 @@
 package test;
 
-import arena.*;
+import arena.characters.*;
+import arena.gamelogic.BattleService;
+import arena.gamelogic.Player;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

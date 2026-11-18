@@ -1,4 +1,6 @@
-package arena;
+package arena.gamelogic;
+
+import arena.characters.*;
 
 public class Player {
     private String name;

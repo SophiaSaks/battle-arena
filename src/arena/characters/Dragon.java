@@ -1,4 +1,6 @@
-package arena;
+package arena.characters;
+
+import arena.gamelogic.Superpower;
 
 public class Dragon extends GameCharacter {
     public Dragon() {

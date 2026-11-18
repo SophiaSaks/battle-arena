@@ -1,4 +1,6 @@
-package arena;
+package arena.characters;
+
+import arena.gamelogic.Superpower;
 
 public class Ranger extends GameCharacter{
     public Ranger (){

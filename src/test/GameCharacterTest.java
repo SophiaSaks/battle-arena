@@ -1,6 +1,10 @@
 package test;
 
-import arena.*;
+import arena.characters.GameCharacter;
+import arena.characters.Knight;
+import arena.characters.Magician;
+import arena.gamelogic.BattleService;
+import arena.gamelogic.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
