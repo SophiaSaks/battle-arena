@@ -43,6 +43,6 @@ public class Menu {
 
         Client client = new Client();
         client.saveResults(result);
-        System.out.println("Match saved.");
+        System.out.println("Match saved."); //loggning INFO
     }
 }
