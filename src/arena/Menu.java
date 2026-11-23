@@ -1,22 +1,60 @@
 package arena;
-// test
+
 import arena.gamelogic.BattleService;
 import arena.gamelogic.Player;
 import arena.serverclient.Client;
+import arena.serverclient.Server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class Menu {
+    private static final Logger logg = Logger.getLogger(Menu.class.getName());
     private static final Random random = new Random();
     private static final Scanner scanner = new Scanner(System.in);
+    private static Player player = new Player();
+    private static Player computer = new Player();
+    private static BattleService battleService = new BattleService();
 
     static void menu() {
+        System.out.println("\nWelcome! Please make a choice: ");
+        System.out.println("\n1. Play a match");
+        System.out.println("\n2. See history");
+        while(true){
+            try{
+                int answer = scanner.nextInt();
+                scanner.nextLine();
+                if(answer == 1 || answer == 2){
+                    switch(answer){
+                        case 1 -> gameMenu();
+                        case 2 -> {
+                            String text = Files.readString(Path.of("results.txt"));
+                            System.out.println(text);
+                        }
+                    }
+                    break;
+                } else{
+                    logg.warning("Pick a number between 1 and 2");
+                }
+            }catch(InputMismatchException e){
+                logg.warning("Pick a number between 1 or 2");
+                scanner.nextLine();
+            } catch(IOException e){
+                logg.warning("Could not read results.txt");
+            }
 
-        Player player = new Player();
-        Player computer = new Player();
-        BattleService battleService = new BattleService();
+        }
 
+
+    }
+
+     static void gameMenu(){
         System.out.println("\nWhat's your name?");
         String name = scanner.nextLine();
         player.setName(name);
@@ -24,7 +62,6 @@ public class Menu {
         System.out.println("Hi " + player.getName() + "! Pick a character:");
         System.out.println("1. Magician\n2. Knight\n3. Dragon\n4. Ranger");
         int characterChoice = BattleService.readChoice(1, 4);
-
 
         BattleService.setUpPlayer(characterChoice, player);
 
@@ -42,7 +79,13 @@ public class Menu {
                 + " | Winner: " + winner.getName() + " - Rounds: " + battleService.getRounds();
 
         Client client = new Client();
-        client.saveResults(result);
-        System.out.println("Match saved."); //loggning INFO
+
+        if(result != null){
+            client.saveResults(result);
+            logg.info(LoggColors.GREEN_INFO + "Match saved." + LoggColors.RESET);
+        } else {
+            logg.warning(LoggColors.YELLOW_WARNING + "No result found" + LoggColors.RESET);
+        }
+
     }
 }

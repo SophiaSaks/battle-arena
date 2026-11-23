@@ -1,56 +1,56 @@
 package arena.serverclient;
 
+import arena.LoggColors;
+import arena.gamelogic.BattleService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.logging.Logger;
 
 public class Server {
+    private static final Logger logg = Logger.getLogger(Server.class.getName());
+
     static void main(String[] args) {
         Path file = Path.of("results.txt");
 
         try {
             ServerSocket serverSocket = new ServerSocket(5000);
 
-            System.out.println("Servern har startat"); //loggning INFO
-            System.out.println("Servern väntar på client"); //loggning INFO
+            logg.info(LoggColors.GREEN_INFO.getAnsi() +"Server has started" + LoggColors.RESET.getAnsi());
+            logg.info(LoggColors.GREEN_INFO + "Server is waiting for client" + LoggColors.RESET);
 
             while (true) {
                 try (Socket socket = serverSocket.accept()) {
-                    System.out.println("En klient anslöt!"); //loggning INFO
+                    logg.info(LoggColors.GREEN_INFO + "Client connected!" + LoggColors.RESET);
 
                     BufferedReader inputReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                    // PrintWriter outputWriter = new PrintWriter(socket.getOutputStream(), true); //behövs ej
-
-                    String message; //det här kan vi förenkla till String message = inputReader.readLine(); och sen istället för while:n här under
-                    //kan vi köra if (message != null) ba
+                    String message;
 
                     while ((message = inputReader.readLine()) != null) {
-                        if (message.equalsIgnoreCase("QUIT")) { //detta vet jag inte om vi behöver ha? att de ska kunna stänga servern med quit?
-                           // outputWriter.print("Hejdå"); //den här tror jag vi kan ta bort
-                            break;
-                        }
 
-                        Files.writeString(file, message + "\n", StandardOpenOption.CREATE, //viktigt för uppgiften
-                                StandardOpenOption.APPEND // viktigt för uppgiften
+                        Files.writeString(file,
+                                message +
+                                        "\n",
+                                StandardOpenOption.CREATE,
+                                StandardOpenOption.APPEND
                         );
-                        System.out.println("Sparade meddelandet: " + message); //loggning INFO
-                        // outputWriter.println("Sparat"); //behövs ej
+                        logg.info(LoggColors.GREEN_INFO + "Saved messaged: " + message + LoggColors.RESET);
 
                     }
-                    System.out.println("Client kopplades ifrån"); //Loggning INFO
+                    logg.info(LoggColors.GREEN_INFO + "Client disconnected" + LoggColors.RESET);
                 } catch (IOException e) {
-                    System.out.println("Fel: " + e.getMessage()); //loggning WARNING
+                    logg.warning(LoggColors.YELLOW_WARNING + "Error: " + e.getMessage() + LoggColors.RESET);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Kunde inte starta servern : " + e.getMessage()); //loggning WARNING
+            logg.warning(LoggColors.YELLOW_WARNING.getAnsi() + "Kunde inte starta servern : " + e.getMessage() + LoggColors.RESET.getAnsi());
         }
     }
 }
