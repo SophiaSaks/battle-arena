@@ -1,5 +1,6 @@
 package arena.gamelogic;
 
+import arena.LoggColors;
 import arena.characters.GameCharacter;
 
 import java.util.Random;
@@ -118,7 +119,7 @@ public class BattleService {
                     return choice;
                 }
             } catch (NumberFormatException e) {
-            logg.warning("Please enter a whole number." + e.getMessage());
+            logg.warning(LoggColors.YELLOW_WARNING + "Please enter a whole number." + e.getMessage() + LoggColors.RESET);
             }
             System.out.println("Choose a number between " + min + " and " + max + ".");
         }
