@@ -32,28 +32,24 @@ public class GameCharacterTest {
     @Test
     @DisplayName("Healing never exceeds max HP")
     void healNeverGoesOverHp() {
-        //Arrange
+
         playerCharacter.receiveHealth(156);
 
-        //Act
         int healedHp = playerCharacter.getHp();
 
-        //Assert
         assertEquals(150, healedHp, "Player HP should be 150 and no more");
     }
 
     @Test
     @DisplayName("Player and computer HP never go below zero")
     void hpNeverGoesBelowZero() {
-        // Arrange
+
         int damageToPlayer = playerCharacter.getHp() + 1;
         int damageToComputer = computerCharacter.getHp() + 1;
 
-        // Act
         playerCharacter.receiveDamage(damageToPlayer);
         computerCharacter.receiveDamage(damageToComputer);
 
-        // Assert
         assertEquals(0, playerCharacter.getHp(), "Player HP should stop at zero");
         assertEquals(0, computerCharacter.getHp(), "Computer HP should stop at zero");
     }
@@ -61,30 +57,24 @@ public class GameCharacterTest {
     @Test
     @DisplayName("Can see if a player is dead")
     void isPlayerDead() {
-        //Arrange
+
         playerCharacter.receiveDamage(playerCharacter.getHp() + 1);
 
-        //Act
         boolean playerIsAlive = playerCharacter.isAlive();
 
-        //Assert
         assertFalse(playerIsAlive);
         assertTrue(computerCharacter.isAlive());
-
     }
 
     @Test
     @DisplayName("Can see if computer is dead")
     void isComputerDead() {
-        //Arrange
+
         computerCharacter.receiveDamage(computerCharacter.getHp() + 1);
 
-        //Act
         boolean computerIsAlive = computerCharacter.isAlive();
 
-        //Assert
         assertFalse(computerIsAlive);
         assertTrue(playerCharacter.isAlive());
-
     }
 }

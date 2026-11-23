@@ -4,7 +4,6 @@ import arena.characters.*;
 import arena.gamelogic.BattleService;
 import arena.gamelogic.Player;
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleServiceTest {
@@ -33,19 +32,15 @@ public class BattleServiceTest {
         rangerCharacter = playerRanger.getCharacter();
     }
 
-
     @Test
     @DisplayName("Player attacked the computer and lowered its HP.")
     void playerAttackLowersComputerHp() {
 
-        // Arrange
         int computerHpBefore = knightCharacter.getHp();
         int playerHpBefore = magicianCharacter.getHp();
 
-        // Act
         battleService.attack(magicianCharacter, knightCharacter);
 
-        // Assert
         int ComputerHpAfter = knightCharacter.getHp();
         int playerHpAfter = magicianCharacter.getHp();
 
@@ -53,36 +48,30 @@ public class BattleServiceTest {
         assertEquals(playerHpAfter, playerHpBefore);
     }
 
-
     @Test
     @DisplayName("Healing super powers works")
     void healingSuperPowersWorks() {
-        // Arrange
-        //Playercharacter is magician with 150 HP to start with
+
         magicianCharacter.receiveDamage(50);
         int hpBeforeHeal = magicianCharacter.getHp();
 
-        // Act
         battleService.useSpecialAction(magicianCharacter, knightCharacter);
 
-        // Assert2
         int hpAfterHeal = magicianCharacter.getHp();
 
         assertEquals(120, hpAfterHeal, "HP should be restored by 20%");
 
         assertTrue(hpAfterHeal == hpBeforeHeal + hpBeforeHeal * 20 / 100,
                 "HP should be restored by 20%");
-
     }
 
     @Test
     @DisplayName("Surprise attack works")
     void surpriseAttackWorks() {
         int playerHpBefore = magicianCharacter.getHp();
-        //Act
+
         battleService.useSpecialAction(dragonCharacter, magicianCharacter);
 
-        //Assert
         int playerHpAfter = magicianCharacter.getHp();
         int damage = playerHpBefore - playerHpAfter;
 
@@ -94,35 +83,24 @@ public class BattleServiceTest {
     @DisplayName("Dodge works")
     void dodgeWorks() {
 
-        //Hp before
         int rangerHpBefore = rangerCharacter.getHp();
 
-
-        //useSpecialAction
         battleService.useSpecialAction(rangerCharacter, magicianCharacter);
 
-        //isDodgeActive?
         assertTrue(rangerCharacter.isDodgeActive());
 
         battleService.attack(magicianCharacter, rangerCharacter);
 
-        //hp after
         int hpFirstAttack = rangerCharacter.getHp();
 
-        //isDodgeActive == false?
         assertFalse(rangerCharacter.isDodgeActive());
 
         battleService.attack(magicianCharacter, rangerCharacter);
 
         int hpSecondAttack = rangerCharacter.getHp();
 
-        //attackera
-
-
         assertEquals(rangerHpBefore, hpFirstAttack);
         assertTrue(hpFirstAttack > hpSecondAttack);
-        //hp before == hp after
-        //Ranger
     }
 
     @Test
@@ -139,34 +117,25 @@ public class BattleServiceTest {
         int damageTaken = hpBefore - hpAfter;
 
         assertEquals(damageTaken, initialDamage / 2);
-
-        //Knight
     }
-
 
     @Test
     void computerShouldWinWhenPlayerHasZeroHp() {
-        // Arrange
+
         magicianCharacter.receiveDamage(magicianCharacter.getHp());
 
-        // Act
         Player winner = battleService.getWinner(playerMagician, playerKnight);
 
-        // Assert
         assertSame(playerKnight, winner);
     }
 
     @Test
     void playerShouldWinWhenComputerHasZeroHp() {
-        // Arrange
+
         knightCharacter.receiveDamage(knightCharacter.getHp());
 
-        // Act
         Player winner = battleService.getWinner(playerMagician, playerKnight);
 
-        // Assert
         assertSame(playerMagician, winner);
     }
-
-
 }
