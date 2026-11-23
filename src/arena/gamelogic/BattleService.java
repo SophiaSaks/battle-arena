@@ -2,18 +2,17 @@ package arena.gamelogic;
 
 import arena.LoggColors;
 import arena.characters.GameCharacter;
-
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class BattleService {
+
     private static Random random = new Random();
     private static final Scanner scanner = new Scanner(System.in);
-
     private static final Logger logg = Logger.getLogger(BattleService.class.getName());
-
     public static int rounds = 0;
+
     public int getRounds() {
         return rounds;
     }
@@ -60,7 +59,6 @@ public class BattleService {
         System.out.println(computer.getName() + " has " + computer.getCharacter().getHp() + " HP left.");
     }
 
-
     public Player getWinner(Player player, Player computer) {
         return !player.getCharacter().isAlive() ? computer : player;
     }
@@ -85,7 +83,6 @@ public class BattleService {
                 System.out.println("\nChoose an action:");
                 System.out.println("1. Attack\n2. Use special action");
                 int action = readChoice(1, 2);
-
                 executeAction(action, player, computer, battleService);
 
             } else {
@@ -119,12 +116,11 @@ public class BattleService {
                     return choice;
                 }
             } catch (NumberFormatException e) {
-            logg.warning(LoggColors.YELLOW_WARNING + "Please enter a whole number." + e.getMessage() + LoggColors.RESET);
+            logg.warning(LoggColors.YELLOW_WARNING.color("Please enter a whole number." + e.getMessage()));
             }
             System.out.println("Choose a number between " + min + " and " + max + ".");
         }
     }
-
 
     public static void executeAction(int action, Player attacker, Player defender, BattleService battleService) {
         if (action == 1) {

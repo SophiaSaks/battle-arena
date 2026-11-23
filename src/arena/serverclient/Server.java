@@ -1,8 +1,6 @@
 package arena.serverclient;
 
 import arena.LoggColors;
-import arena.gamelogic.BattleService;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,14 +18,13 @@ public class Server {
         Path file = Path.of("results.txt");
 
         try {
-            ServerSocket serverSocket = new ServerSocket(5000);
-
-            logg.info(LoggColors.GREEN_INFO.getAnsi() +"Server has started" + LoggColors.RESET.getAnsi());
-            logg.info(LoggColors.GREEN_INFO + "Server is waiting for client" + LoggColors.RESET);
+            ServerSocket serverSocket = new ServerSocket(5001);
+            logg.info(LoggColors.GREEN_INFO.color("Server has started")) ;
+            logg.info(LoggColors.GREEN_INFO.color("Server is waiting for client")) ;
 
             while (true) {
                 try (Socket socket = serverSocket.accept()) {
-                    logg.info(LoggColors.GREEN_INFO + "Client connected!" + LoggColors.RESET);
+                    logg.info(LoggColors.GREEN_INFO.color("Client connected!"));
 
                     BufferedReader inputReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -41,16 +38,16 @@ public class Server {
                                 StandardOpenOption.CREATE,
                                 StandardOpenOption.APPEND
                         );
-                        logg.info(LoggColors.GREEN_INFO + "Saved messaged: " + message + LoggColors.RESET);
 
+                        logg.info(LoggColors.GREEN_INFO.color("Saved messaged: "));
                     }
-                    logg.info(LoggColors.GREEN_INFO + "Client disconnected" + LoggColors.RESET);
+                    logg.info(LoggColors.GREEN_INFO.color("Client disconnected"));
                 } catch (IOException e) {
-                    logg.warning(LoggColors.YELLOW_WARNING + "Error: " + e.getMessage() + LoggColors.RESET);
+                    logg.warning(LoggColors.YELLOW_WARNING.color("Error: " + e.getMessage()));
                 }
             }
         } catch (IOException e) {
-            logg.warning(LoggColors.YELLOW_WARNING.getAnsi() + "Kunde inte starta servern : " + e.getMessage() + LoggColors.RESET.getAnsi());
+            logg.warning(LoggColors.YELLOW_WARNING.color("Kunde inte starta servern : " + e.getMessage()));
         }
     }
 }

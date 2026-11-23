@@ -2,7 +2,6 @@ package arena.characters;
 
 import arena.gamelogic.CalculateDamage;
 import arena.gamelogic.Superpower;
-
 import java.util.Random;
 
 public abstract class GameCharacter implements CalculateDamage {
@@ -35,7 +34,6 @@ public abstract class GameCharacter implements CalculateDamage {
         this.superpower = superpower;
     }
 
-    // Damage
     public void receiveDamage(int damage) {
         if (damage < 0) {
             throw new IllegalArgumentException("Damage can not be negative.");
@@ -44,7 +42,6 @@ public abstract class GameCharacter implements CalculateDamage {
         hp = Math.max(0, hp - actualDamage);
     }
 
-    // Heal
     public void receiveHealth(int heal) {
         int actualHealth = adjustHealth(heal);
         hp = Math.min(150, hp + actualHealth);
@@ -53,6 +50,7 @@ public abstract class GameCharacter implements CalculateDamage {
     public Superpower getSuperPower() {
         return superpower;
     }
+
     public boolean isAlive() {
         return hp > 0;
     }

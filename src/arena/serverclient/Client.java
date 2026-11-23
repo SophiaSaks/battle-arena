@@ -10,18 +10,17 @@ import java.util.logging.Logger;
 public class Client {
     private static final Logger logg = Logger.getLogger(Client.class.getName());
     public void saveResults(String result) {
-        try (Socket socket = new Socket("localhost", 5000)) {
+        try (Socket socket = new Socket("localhost", 5001)) {
             PrintWriter outputWriter = new PrintWriter(socket.getOutputStream(), true);
 
-            logg.info(LoggColors.GREEN_INFO + "Connected to server" + LoggColors.RESET);
+            logg.info(LoggColors.GREEN_INFO.color("Connected to server"));
 
             outputWriter.println(result);
 
-            logg.info(LoggColors.GREEN_INFO + "Result sent to server" + LoggColors.RESET);
+            logg.info(LoggColors.GREEN_INFO.color("Result sent to server"));
 
         } catch (IOException e) {
-            logg.warning(LoggColors.YELLOW_WARNING + "Connection refused" + LoggColors.RESET);
-            e.printStackTrace();
+            logg.warning(LoggColors.YELLOW_WARNING.color("Connection refused" + e.getMessage()));
         }
     }
 }

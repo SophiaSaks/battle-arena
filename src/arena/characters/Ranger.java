@@ -11,5 +11,4 @@ public class Ranger extends GameCharacter{
     public int calculateDamage(){
         return getRandom().nextInt(11) + 5;
     }
-
 }

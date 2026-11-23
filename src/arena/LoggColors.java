@@ -14,4 +14,8 @@ public enum LoggColors {
     LoggColors(String ansi) {
         this.ansi = ansi;
     }
+    public String color(String text){
+        return ansi + text + RESET.getAnsi();
+    }
 }
+

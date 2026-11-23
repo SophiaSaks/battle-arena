@@ -3,13 +3,9 @@ package arena;
 import arena.gamelogic.BattleService;
 import arena.gamelogic.Player;
 import arena.serverclient.Client;
-import arena.serverclient.Server;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -23,38 +19,23 @@ public class Menu {
     private static BattleService battleService = new BattleService();
 
     static void menu() {
-        System.out.println("\nWelcome! Please make a choice: ");
-        System.out.println("\n1. Play a match");
-        System.out.println("\n2. See history");
-        while(true){
-            try{
-                int answer = scanner.nextInt();
-                scanner.nextLine();
-                if(answer == 1 || answer == 2){
-                    switch(answer){
-                        case 1 -> gameMenu();
-                        case 2 -> {
-                            String text = Files.readString(Path.of("results.txt"));
-                            System.out.println(text);
-                        }
-                    }
-                    break;
-                } else{
-                    logg.warning("Pick a number between 1 and 2");
+        while (true) {
+            System.out.println("\nWelcome! Please make a choice: ");
+            System.out.println("\n1. Play a match");
+            System.out.println("\n2. See history");
+
+            int answer = BattleService.readChoice(1, 2);
+            switch (answer) {
+                case 1 -> gameMenu();
+                case 2 -> historyMenu();
+                default -> {
+                    return;
                 }
-            }catch(InputMismatchException e){
-                logg.warning("Pick a number between 1 or 2");
-                scanner.nextLine();
-            } catch(IOException e){
-                logg.warning("Could not read results.txt");
             }
-
         }
-
-
     }
 
-     static void gameMenu(){
+    static void gameMenu() {
         System.out.println("\nWhat's your name?");
         String name = scanner.nextLine();
         player.setName(name);
@@ -76,16 +57,26 @@ public class Menu {
 
         String result = player.getName() + " (" + player.getCharacter().getName() + ")"
                 + " vs " + computer.getName() + " (" + computer.getCharacter().getName() + ")"
-                + " | Winner: " + winner.getName() + " - Rounds: " + battleService.getRounds();
+                + " - Winner: " + winner.getName() + " - Rounds: " + battleService.getRounds();
 
         Client client = new Client();
 
-        if(result != null){
+        if (result != null) {
             client.saveResults(result);
-            logg.info(LoggColors.GREEN_INFO + "Match saved." + LoggColors.RESET);
+            logg.info(LoggColors.GREEN_INFO.color("Match saved."));
         } else {
-            logg.warning(LoggColors.YELLOW_WARNING + "No result found" + LoggColors.RESET);
+            logg.warning(LoggColors.YELLOW_WARNING.color("No result found"));
         }
+    }
 
+    static void historyMenu() {
+        try {
+            String text = Files.readString(Path.of("results.txt"));
+            logg.info(LoggColors.GREEN_INFO.color("Match history: "));
+            System.out.println(text);
+
+        } catch (IOException e) {
+            logg.warning(LoggColors.YELLOW_WARNING.color("Could not read results.txt" + e.getMessage()));
+        }
     }
 }
