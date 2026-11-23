@@ -10,24 +10,24 @@ import java.util.Scanner;
 public class Client {
     public void saveResults(String result) {
         try (Socket socket = new Socket("localhost", 5000)) {
-            Scanner scanner = new Scanner(System.in);
+            // Scanner scanner = new Scanner(System.in); //denna tror jag inte vi behöver
 
             PrintWriter outputWriter = new PrintWriter(socket.getOutputStream(), true);
 
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // BufferedReader inputReader = new BufferedReader(new InputStreamReader(socket.getInputStream())); //tror inte vi behöver denna
 
-            System.out.println("Ansluten till servern");
+            System.out.println("Ansluten till servern"); //loggning info
 
             // while (true) {
             outputWriter.println(result);
 
-            String response = inputReader.readLine();
+            // String response = inputReader.readLine(); //tror inte vi behöver denna heller
 
             // if (response == null) {
                 // System.out.println("Servern kopplades ifrån");
                 // break;
             // }
-            System.out.println("Server: " + response);
+            System.out.println("Resultat skickades till servern"); //Loggning info
             // }
         } catch (IOException e) {
             System.out.println("connection refused");
