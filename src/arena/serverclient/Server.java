@@ -1,6 +1,7 @@
 package arena.serverclient;
 
 import arena.LoggColors;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,8 +20,8 @@ public class Server {
 
         try {
             ServerSocket serverSocket = new ServerSocket(5001);
-            logg.info(LoggColors.GREEN_INFO.color("Server has started")) ;
-            logg.info(LoggColors.GREEN_INFO.color("Server is waiting for client")) ;
+            logg.info(LoggColors.GREEN_INFO.color("Server has started"));
+            logg.info(LoggColors.GREEN_INFO.color("Server is waiting for client"));
 
             while (true) {
                 try (Socket socket = serverSocket.accept()) {
@@ -39,7 +40,7 @@ public class Server {
                                 StandardOpenOption.APPEND
                         );
 
-                        logg.info(LoggColors.GREEN_INFO.color("Saved messaged: "));
+                        logg.info(LoggColors.GREEN_INFO.color("Saved message: " + message));
                     }
                     logg.info(LoggColors.GREEN_INFO.color("Client disconnected"));
                 } catch (IOException e) {
@@ -47,7 +48,7 @@ public class Server {
                 }
             }
         } catch (IOException e) {
-            logg.warning(LoggColors.YELLOW_WARNING.color("Kunde inte starta servern : " + e.getMessage()));
+            logg.warning(LoggColors.YELLOW_WARNING.color("Server could not start : " + e.getMessage()));
         }
     }
 }

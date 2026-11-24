@@ -3,7 +3,6 @@ package test;
 import arena.characters.GameCharacter;
 import arena.characters.Knight;
 import arena.characters.Magician;
-import arena.gamelogic.BattleService;
 import arena.gamelogic.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameCharacterTest {
 
-    private BattleService battleService;
     private Player player;
     private Player computer;
     private GameCharacter playerCharacter;
@@ -24,7 +22,6 @@ public class GameCharacterTest {
 
         player = new Player("Player1", new Magician());
         computer = new Player("Computer", new Knight());
-        battleService = new BattleService();
         playerCharacter = player.getCharacter();
         computerCharacter = computer.getCharacter();
     }
@@ -62,8 +59,8 @@ public class GameCharacterTest {
 
         boolean playerIsAlive = playerCharacter.isAlive();
 
-        assertFalse(playerIsAlive);
-        assertTrue(computerCharacter.isAlive());
+        assertFalse(playerIsAlive, "Player is not alive.");
+        assertTrue(computerCharacter.isAlive(), "Computer is alive.");
     }
 
     @Test
@@ -74,7 +71,7 @@ public class GameCharacterTest {
 
         boolean computerIsAlive = computerCharacter.isAlive();
 
-        assertFalse(computerIsAlive);
-        assertTrue(playerCharacter.isAlive());
+        assertFalse(computerIsAlive, "Computer is not alive.");
+        assertTrue(playerCharacter.isAlive(), "Player is alive.");
     }
 }

@@ -1,7 +1,7 @@
 package arena.gamelogic;
 
 public enum Superpower {
-    SUPRISE_ATTACK,
+    SURPRISE_ATTACK,
     HEAL,
     DEFEND,
     DODGE

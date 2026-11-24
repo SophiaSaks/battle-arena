@@ -3,6 +3,7 @@ package arena;
 import arena.gamelogic.BattleService;
 import arena.gamelogic.Player;
 import arena.serverclient.Client;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,6 +59,7 @@ public class Menu {
         String result = player.getName() + " (" + player.getCharacter().getName() + ")"
                 + " vs " + computer.getName() + " (" + computer.getCharacter().getName() + ")"
                 + " - Winner: " + winner.getName() + " - Rounds: " + battleService.getRounds();
+        battleService.showMatchResult(result);
 
         Client client = new Client();
 

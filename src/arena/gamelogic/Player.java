@@ -31,7 +31,7 @@ public class Player {
         return character;
     }
 
-    public void selectCharacter(int choice, Player player){
+    public void selectCharacter(int choice, Player player) {
         switch (choice) {
             case 1 -> player.setCharacter(new Magician());
             case 2 -> player.setCharacter(new Knight());
@@ -39,6 +39,5 @@ public class Player {
             case 4 -> player.setCharacter(new Ranger());
             default -> System.out.println("No character picked!");
         }
-
     }
 }

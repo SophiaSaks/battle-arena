@@ -30,10 +30,10 @@ public class BattleService {
         defender.receiveDamage(damage);
     }
 
-    public void useSpecialAction(GameCharacter attacker, GameCharacter defender) {
+    public void useSuperPower(GameCharacter attacker, GameCharacter defender) {
         Superpower superpower = attacker.getSuperPower();
         switch (superpower) {
-            case SUPRISE_ATTACK -> {
+            case SURPRISE_ATTACK -> {
                 int damage = random.nextInt(25);
                 if (defender.isDefendActive()) {
                     damage /= 2;
@@ -63,9 +63,8 @@ public class BattleService {
         return !player.getCharacter().isAlive() ? computer : player;
     }
 
-    public void showWinner(Player player, Player computer) {
-        Player winner = getWinner(player, computer);
-        System.out.println("Winner: " + winner.getName());
+    public void showMatchResult(String result) {
+        System.out.println(result);
     }
 
     public static void setUpPlayer(int choice, Player player) {
@@ -81,7 +80,7 @@ public class BattleService {
                 rounds++;
                 System.out.println("\n" + player.getName() + "'s turn:");
                 System.out.println("\nChoose an action:");
-                System.out.println("1. Attack\n2. Use special action");
+                System.out.println("1. Attack\n2. Use a superpower!");
                 int action = readChoice(1, 2);
                 executeAction(action, player, computer, battleService);
 
@@ -90,7 +89,7 @@ public class BattleService {
                 int action = random.nextInt(2) + 1;
 
                 if (action == 2) {
-                    System.out.println(computer.getName() + " used a special action!");
+                    System.out.println(computer.getName() + " used a superpower!");
                 }
                 executeAction(action, computer, player, battleService);
             }
@@ -103,7 +102,6 @@ public class BattleService {
 
             turn = (turn == 1) ? 2 : 1;
         }
-        battleService.showWinner(player, computer);
     }
 
     public static int readChoice(int min, int max) {
@@ -127,7 +125,7 @@ public class BattleService {
             battleService.attack(attacker.getCharacter(), defender.getCharacter());
             System.out.println(attacker.getName() + " attacked " + defender.getName());
         } else {
-            battleService.useSpecialAction(attacker.getCharacter(), defender.getCharacter());
+            battleService.useSuperPower(attacker.getCharacter(), defender.getCharacter());
         }
     }
 }

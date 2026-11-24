@@ -2,6 +2,7 @@ package arena.characters;
 
 import arena.gamelogic.CalculateDamage;
 import arena.gamelogic.Superpower;
+
 import java.util.Random;
 
 public abstract class GameCharacter implements CalculateDamage {
@@ -74,8 +75,4 @@ public abstract class GameCharacter implements CalculateDamage {
     public int getHp() {
         return hp;
     }
-
-    @Override
-    public abstract int calculateDamage();
-
 }
